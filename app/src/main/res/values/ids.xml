@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="backing_url" type="id" />
+    <item name="asset_name" type="id" />
+    <item name="release_name" type="id" />
+    <item name="downloading" type="id" />
+    <item name="mime_type" type="id" />
+</resources>

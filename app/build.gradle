@@ -1,0 +1,71 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 25
+    buildToolsVersion "25.0.1"
+    defaultConfig {
+        applicationId "com.alimuzaffar.demo.githubreleasedownloader"
+        minSdkVersion 18
+        targetSdkVersion 25
+        versionCode 2
+        versionName "1.1"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            resValue "string", "github_oauth_token", getOAuthToken()
+            resValue "string", "github_releases_url", getGitHubReleasesUrl()
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+
+        debug {
+            resValue "string", "github_oauth_token", getOAuthToken()
+            resValue "string", "github_releases_url", getGitHubReleasesUrl()
+        }
+    }
+}
+
+dependencies {
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
+        exclude group: 'com.android.support', module: 'support-annotations'
+    })
+    compile 'com.android.support:appcompat-v7:25.0.1'
+    compile 'com.android.support:recyclerview-v7:25.0.1'
+    compile 'com.android.support:design:25.0.1'
+    compile 'com.koushikdutta.ion:ion:2.1.9'
+    testCompile 'junit:junit:4.12'
+}
+
+def getOAuthToken() {
+    def p = System.getenv("GITHUB_OAUTH_TOKEN") ?: null
+    if (p != null) {
+        return p;
+    }
+
+    Properties properties = new Properties()
+    if (project.rootProject.file('local.properties').exists()) {
+        properties.load(project.rootProject.file('local.properties').newDataInputStream())
+        return properties.getProperty('github_oauth_token')
+    } else {
+        System.err("GITHUB_OAUTH_TOKEN environment variable not found, local.properties does not exist.")
+    }
+    return p;
+}
+
+def getGitHubReleasesUrl() {
+    def p = System.getenv("GITHUB_RELEASES_URL") ?: null
+    if (p != null) {
+        return p;
+    }
+
+    Properties properties = new Properties()
+    if (project.rootProject.file('local.properties').exists()) {
+        properties.load(project.rootProject.file('local.properties').newDataInputStream())
+        return properties.getProperty('github_releases_url')
+    } else {
+        System.err("GITHUB_OAUTH_TOKEN environment variable not found, local.properties does not exist.")
+    }
+    return p;
+}
