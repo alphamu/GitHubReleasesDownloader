@@ -1,6 +1,5 @@
 package com.alimuzaffar.demo.githubreleasedownloader;
 
-import android.content.Context;
 import android.os.Environment;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -107,7 +106,6 @@ public class ReleaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         }
         view.setTag(R.id.downloading, true);
 
-        final Context context = view.getContext().getApplicationContext();
         String assetName = (String) view.getTag(R.id.asset_name);
         String releaseName = (String) view.getTag(R.id.release_name);
         String downloadUrl = (String) view.getTag(R.id.backing_url);
@@ -117,10 +115,6 @@ public class ReleaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 releaseName.replace("/", "_"),
                 assetName,
                 mimeType);
-    }
-
-    private void startDownload() {
-
     }
 
     public int getHeaderCount() {
