@@ -12,6 +12,10 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 
+import com.alimuzaffar.demo.githubreleasedownloader.fragment.StoragePermissionHelper;
+import com.alimuzaffar.demo.githubreleasedownloader.model.Release;
+import com.alimuzaffar.demo.githubreleasedownloader.network.GitHubService;
+
 import java.io.File;
 import java.io.IOException;
 import java.util.List;
@@ -26,6 +30,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
+@SuppressWarnings("FieldCanBeLocal")
 public class MainActivity extends AppCompatActivity implements StoragePermissionHelper.StoragePermissionCallback {
     private final String TAG = getClass().getSimpleName();
     private ReleaseAdapter mAdapter;
@@ -116,7 +121,7 @@ public class MainActivity extends AppCompatActivity implements StoragePermission
                     Snackbar.make(mRecyclerView, "Something's gone wrong", Snackbar.LENGTH_LONG).show();
                     return;
                 }
-                DownloadFileAsyncTask downloadFileAsyncTask = new DownloadFileAsyncTask(MainActivity.this, releaseName, assetName, mimeType) {
+                DownloadFileAsyncTask downloadFileAsyncTask = new DownloadFileAsyncTask(releaseName, assetName, mimeType) {
                     @Override
                     void onError(String message) {
                         Snackbar.make(mRecyclerView, message, Snackbar.LENGTH_LONG).show();

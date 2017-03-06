@@ -1,6 +1,5 @@
 package com.alimuzaffar.demo.githubreleasedownloader;
 
-import android.os.Environment;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -9,17 +8,19 @@ import android.view.ViewGroup;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import java.io.File;
+import com.alimuzaffar.demo.githubreleasedownloader.model.Asset;
+import com.alimuzaffar.demo.githubreleasedownloader.model.Release;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@SuppressWarnings("WeakerAccess")
 public class ReleaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder> implements View.OnClickListener {
     private static final int TYPE_RELEASE = 0;
     private static final int TYPE_ASSET = 1;
 
     private ArrayList<Object> mCombinedData = new ArrayList<>(100);
     private List<Release> mReleases = null;
-    private File downloadsDir = new File(Environment.getExternalStorageDirectory(), "Download");
     private MainActivity mActivity = null;
 
     public ReleaseAdapter(MainActivity activity, List<Release> releases) {
@@ -117,6 +118,7 @@ public class ReleaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 mimeType);
     }
 
+    @SuppressWarnings("unused")
     public int getHeaderCount() {
         if (mReleases == null) {
             return 0;
@@ -124,6 +126,7 @@ public class ReleaseAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
         return mReleases.size();
     }
 
+    @SuppressWarnings("unused")
     public void clear() {
         mCombinedData.clear();
         notifyDataSetChanged();

@@ -1,4 +1,4 @@
-package com.alimuzaffar.demo.githubreleasedownloader;
+package com.alimuzaffar.demo.githubreleasedownloader.fragment;
 
 import android.Manifest;
 import android.content.Context;

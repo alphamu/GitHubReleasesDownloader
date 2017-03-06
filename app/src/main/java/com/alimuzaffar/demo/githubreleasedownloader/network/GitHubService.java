@@ -1,4 +1,6 @@
-package com.alimuzaffar.demo.githubreleasedownloader;
+package com.alimuzaffar.demo.githubreleasedownloader.network;
+
+import com.alimuzaffar.demo.githubreleasedownloader.model.Release;
 
 import java.util.List;
 

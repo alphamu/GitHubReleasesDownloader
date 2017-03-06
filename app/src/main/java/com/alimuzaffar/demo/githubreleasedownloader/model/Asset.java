@@ -1,4 +1,4 @@
-package com.alimuzaffar.demo.githubreleasedownloader;
+package com.alimuzaffar.demo.githubreleasedownloader.model;
 
 public class Asset {
     private String url;

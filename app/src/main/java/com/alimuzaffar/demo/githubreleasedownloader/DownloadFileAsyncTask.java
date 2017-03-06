@@ -14,20 +14,19 @@ import okhttp3.ResponseBody;
 
 import static android.content.ContentValues.TAG;
 
+@SuppressWarnings({"WeakerAccess", "FieldCanBeLocal"})
 public abstract class DownloadFileAsyncTask extends AsyncTask<ResponseBody, Long, Boolean> {
     private File downloadsDir = new File(Environment.getExternalStorageDirectory(), "Download");
+    protected File filename;
+    protected String mimeType;
     final File releaseDir;
-    final File filename;
     final String releaseName;
     final String assetName;
-    final String mimeType;
-    private MainActivity context;
 
-    public DownloadFileAsyncTask(MainActivity context, String releaseName, String assetName, String mimeType) {
+    public DownloadFileAsyncTask(String releaseName, String assetName, String mimeType) {
         this.releaseName = releaseName;
         this.assetName = assetName;
         this.mimeType = mimeType;
-        this.context = context;
         releaseDir = new File(downloadsDir, releaseName);
         filename = new File(releaseDir, assetName);
     }
@@ -35,6 +34,7 @@ public abstract class DownloadFileAsyncTask extends AsyncTask<ResponseBody, Long
     @Override
     protected Boolean doInBackground(ResponseBody... params) {
         if (!releaseDir.exists()) {
+            //noinspection ResultOfMethodCallIgnored
             releaseDir.mkdirs();
         }
 
